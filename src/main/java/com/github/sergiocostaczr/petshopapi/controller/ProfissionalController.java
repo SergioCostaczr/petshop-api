@@ -1,0 +1,58 @@
+package com.github.sergiocostaczr.petshopapi.controller;
+
+import com.github.sergiocostaczr.petshopapi.dto.ProfissionalRequestDTO;
+import com.github.sergiocostaczr.petshopapi.dto.ProfissionalResponseDTO;
+import com.github.sergiocostaczr.petshopapi.service.ProfissionalService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/profissionais")
+public class ProfissionalController {
+
+    @Autowired
+    private ProfissionalService service;
+
+
+    @PostMapping
+    public ResponseEntity<ProfissionalResponseDTO> salvar(@RequestBody @Valid ProfissionalRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(dto));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(service.buscarPorId(id));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> atualizarPorId(@PathVariable Long id, @RequestBody @Valid ProfissionalRequestDTO dto) {
+        try {
+            return ResponseEntity.ok(service.atualizarPorId(id, dto));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listar() {
+        return ResponseEntity.ok(service.listar());
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deletarPorId(@PathVariable Long id) {
+        try {
+            service.deletarPorId(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}

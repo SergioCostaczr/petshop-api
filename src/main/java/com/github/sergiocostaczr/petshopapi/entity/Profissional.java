@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,10 +24,10 @@ public class Profissional {
     private String nome;
 
     @Column(nullable = false)
-    private String profissao;
+    private String funcao;
 
     @Column(nullable = false)
-    private Double salario;
+    private BigDecimal salario;
 
     @CreatedDate
     @Column
