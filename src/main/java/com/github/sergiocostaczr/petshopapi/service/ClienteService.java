@@ -1,0 +1,82 @@
+package com.github.sergiocostaczr.petshopapi.service;
+
+import com.github.sergiocostaczr.petshopapi.dto.ClienteRequestDTO;
+import com.github.sergiocostaczr.petshopapi.dto.ClienteResponseDTO;
+import com.github.sergiocostaczr.petshopapi.entity.Cliente;
+import com.github.sergiocostaczr.petshopapi.repository.ClienteRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class ClienteService {
+
+    @Autowired
+    private ClienteRepository repository;
+
+    public ClienteResponseDTO salvar(ClienteRequestDTO dto){
+        Cliente cliente = new Cliente();
+        dtoParaEntidade(cliente,dto);
+
+        Cliente entidadeSalva = repository.save(cliente);
+
+        return entidadeParaResponseDTO(entidadeSalva);
+
+    }
+
+    public ClienteResponseDTO buscarPorId(Long id){
+        Cliente clienteEncontrado = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
+        return entidadeParaResponseDTO(clienteEncontrado);
+    }
+
+    public ClienteResponseDTO atualizarPorId(Long id, ClienteRequestDTO dto){
+        Cliente clienteEncontrado = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
+
+        dtoParaEntidade(clienteEncontrado,dto);
+
+        Cliente clienteAtualizado = repository.save(clienteEncontrado);
+
+        return entidadeParaResponseDTO(clienteAtualizado);
+    }
+
+    public List<ClienteResponseDTO> listar(){
+        List<Cliente> lista = repository.findAll();
+
+        return lista.stream().map(x-> entidadeParaResponseDTO(x)).toList();
+
+    }
+
+    public void deletarPorId(Long id){
+        repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
+        repository.deleteById(id);
+    }
+
+    private void dtoParaEntidade(Cliente entidade, ClienteRequestDTO dto ){
+        entidade.setNome(dto.nome());
+        entidade.setEndereco(dto.endereco());
+        entidade.setTelefone(dto.telefone());
+    }
+
+    private ClienteResponseDTO entidadeParaResponseDTO(Cliente cliente){
+        if (cliente.getPetLista() == null){
+            return new ClienteResponseDTO(
+                    cliente.getId(),
+                    cliente.getNome(),
+                    cliente.getTelefone(),
+                    cliente.getEndereco(),
+                    new ArrayList<>()
+            );
+        }
+        return new ClienteResponseDTO(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getTelefone(),
+                cliente.getEndereco(),
+                cliente.getPetLista()
+        );
+    }
+
+}
