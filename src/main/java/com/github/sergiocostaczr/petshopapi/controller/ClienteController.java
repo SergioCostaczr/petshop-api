@@ -2,9 +2,12 @@ package com.github.sergiocostaczr.petshopapi.controller;
 
 import com.github.sergiocostaczr.petshopapi.dto.ClienteRequestDTO;
 import com.github.sergiocostaczr.petshopapi.dto.ClienteResponseDTO;
+import com.github.sergiocostaczr.petshopapi.dto.ProfissionalResponseDTO;
 import com.github.sergiocostaczr.petshopapi.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +36,8 @@ public class ClienteController {
 
     @GetMapping("{id}")
     @Operation(summary = "Buscar cliente por ID")
-    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Cliente encontrado"),
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Cliente encontrado",
+                                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = ClienteResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> buscarPorId(@Parameter(description = "ID do cliente") @PathVariable Long id) {
         try {
@@ -45,7 +49,8 @@ public class ClienteController {
 
     @PutMapping("{id}")
     @Operation(summary = "Atualizar cliente por ID")
-    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Atualizado com sucesso"),
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Atualizado com sucesso",
+                                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = ClienteResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> atualizarPorId(@Parameter(description = "ID do cliente") @PathVariable Long id, @RequestBody ClienteRequestDTO dto) {
         try {

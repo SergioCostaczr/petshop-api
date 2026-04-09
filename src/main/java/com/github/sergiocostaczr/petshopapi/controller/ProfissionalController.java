@@ -1,10 +1,13 @@
 package com.github.sergiocostaczr.petshopapi.controller;
 
+import com.github.sergiocostaczr.petshopapi.dto.ClienteResponseDTO;
 import com.github.sergiocostaczr.petshopapi.dto.ProfissionalRequestDTO;
 import com.github.sergiocostaczr.petshopapi.dto.ProfissionalResponseDTO;
 import com.github.sergiocostaczr.petshopapi.service.ProfissionalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,7 +37,9 @@ public class ProfissionalController {
 
     @GetMapping("{id}")
     @Operation(summary = "Buscar profissional por ID")
-    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Profissional encontrado"),
+    @ApiResponses({ @ApiResponse(responseCode = "200",
+                                description = "Profissional encontrado",
+                                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProfissionalResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> buscarPorId(@Parameter(description = "ID do profissional") @PathVariable Long id) {
         try {
@@ -46,7 +51,8 @@ public class ProfissionalController {
 
     @PutMapping("{id}")
     @Operation(summary = "Atualizar profissional por ID")
-    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Atualizado com sucesso"),
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Atualizado com sucesso",
+                                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProfissionalResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> atualizarPorId(@Parameter(description = "ID do profissional") @PathVariable Long id, @RequestBody @Valid ProfissionalRequestDTO dto) {
         try {
