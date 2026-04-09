@@ -9,6 +9,6 @@ public record ClienteResponseDTO(
         String nome,
         String telefone,
         String endereco,
-        List<Pet> petLista
+        List<PetResponseDTO> petLista
 ) {
 }

@@ -2,6 +2,7 @@ package com.github.sergiocostaczr.petshopapi.service;
 
 import com.github.sergiocostaczr.petshopapi.dto.ClienteRequestDTO;
 import com.github.sergiocostaczr.petshopapi.dto.ClienteResponseDTO;
+import com.github.sergiocostaczr.petshopapi.dto.PetResponseDTO;
 import com.github.sergiocostaczr.petshopapi.entity.Cliente;
 import com.github.sergiocostaczr.petshopapi.repository.ClienteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -61,21 +62,24 @@ public class ClienteService {
     }
 
     private ClienteResponseDTO entidadeParaResponseDTO(Cliente cliente){
-        if (cliente.getPetLista() == null){
-            return new ClienteResponseDTO(
-                    cliente.getId(),
-                    cliente.getNome(),
-                    cliente.getTelefone(),
-                    cliente.getEndereco(),
-                    new ArrayList<>()
-            );
-        }
+        List<PetResponseDTO> pets = cliente.getPetLista() == null
+                ? new ArrayList<>()
+                : cliente.getPetLista().stream()
+                .map(pet -> new PetResponseDTO(
+                        pet.getId(),
+                        pet.getNome(),
+                        pet.getRaca(),
+                        pet.getDataNascimento(),
+                        pet.getClinte().getId()
+                ))
+                .toList();
+
         return new ClienteResponseDTO(
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getTelefone(),
                 cliente.getEndereco(),
-                cliente.getPetLista()
+                pets
         );
     }
 
