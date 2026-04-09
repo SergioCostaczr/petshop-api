@@ -1,8 +1,7 @@
 package com.github.sergiocostaczr.petshopapi.controller;
 
-import com.github.sergiocostaczr.petshopapi.dto.ClienteRequestDTO;
-import com.github.sergiocostaczr.petshopapi.dto.ClienteResponseDTO;
-import com.github.sergiocostaczr.petshopapi.dto.ProfissionalResponseDTO;
+import com.github.sergiocostaczr.petshopapi.dto.request.ClienteRequestDTO;
+import com.github.sergiocostaczr.petshopapi.dto.response.ClienteResponseDTO;
 import com.github.sergiocostaczr.petshopapi.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,6 +1,5 @@
-package com.github.sergiocostaczr.petshopapi.dto;
+package com.github.sergiocostaczr.petshopapi.dto.response;
 
-import com.github.sergiocostaczr.petshopapi.entity.Pet;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;

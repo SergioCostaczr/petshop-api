@@ -1,13 +1,12 @@
 package com.github.sergiocostaczr.petshopapi.service;
 
-import com.github.sergiocostaczr.petshopapi.dto.PetRequestDTO;
-import com.github.sergiocostaczr.petshopapi.dto.PetResponseDTO;
+import com.github.sergiocostaczr.petshopapi.dto.request.PetRequestDTO;
+import com.github.sergiocostaczr.petshopapi.dto.response.PetResponseDTO;
 import com.github.sergiocostaczr.petshopapi.entity.Cliente;
 import com.github.sergiocostaczr.petshopapi.entity.Pet;
 import com.github.sergiocostaczr.petshopapi.repository.ClienteRepository;
 import com.github.sergiocostaczr.petshopapi.repository.PetRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

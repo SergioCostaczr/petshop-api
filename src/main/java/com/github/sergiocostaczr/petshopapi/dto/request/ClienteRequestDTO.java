@@ -1,8 +1,7 @@
-package com.github.sergiocostaczr.petshopapi.dto;
+package com.github.sergiocostaczr.petshopapi.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.UniqueElements;
 
 public record ClienteRequestDTO(
         @Schema(description = "Nome completo do cliente", example = "João Silva")

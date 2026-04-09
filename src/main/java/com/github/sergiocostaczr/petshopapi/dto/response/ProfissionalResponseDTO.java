@@ -1,4 +1,4 @@
-package com.github.sergiocostaczr.petshopapi.dto;
+package com.github.sergiocostaczr.petshopapi.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
