@@ -1,6 +1,7 @@
 # 🐾 Petshop API
+### Trabalho 05 AV2 — Técnicas de Integração de Sistemas
 
-API REST para gerenciamento de clientes, pets e profissionais de um petshop, desenvolvida com Spring Boot e PostgreSQL. Conta com documentação interativa via Swagger UI e está hospedada no Railway.
+API REST para gerenciamento de clientes, pets e profissionais de um petshop, desenvolvida com Spring Boot e PostgreSQL, documentada seguindo o padrão OpenAPI 3.0 e disponibilizada via Swagger UI.
 
 ---
 
@@ -51,6 +52,10 @@ API REST para gerenciamento de clientes, pets e profissionais de um petshop, des
 
 Importe a URL base no **Postman** ou **Insomnia** e faça as requisições diretamente contra o ambiente de produção.
 
+A especificação OpenAPI também está disponível em:
+```
+https://petshop-api-production-ebc2.up.railway.app/v3/api-docs
+```
 
 ---
 
@@ -81,7 +86,7 @@ docker-compose up -d
 ./mvnw spring-boot:run
 ```
 
-A API estará disponível em `http://localhost:8080` e o Swagger em `http://localhost:8080/swagger-ui/index.html`.
+A API estará disponível em `http://localhost:8080` e o Swagger UI em `http://localhost:8080/swagger-ui/index.html`.
 
 ---
 
@@ -93,5 +98,5 @@ A API estará disponível em `http://localhost:8080` e o Swagger em `http://loca
 - Spring Validation
 - PostgreSQL
 - Lombok
-- SpringDoc OpenAPI (Swagger)
-- Docker
+- SpringDoc OpenAPI 3.0
+- Docker / Railway
