@@ -2,8 +2,8 @@ package com.github.sergiocostaczr.petshopapi.service;
 
 import com.github.sergiocostaczr.petshopapi.dto.request.PetRequestDTO;
 import com.github.sergiocostaczr.petshopapi.dto.response.PetResponseDTO;
-import com.github.sergiocostaczr.petshopapi.entity.Cliente;
-import com.github.sergiocostaczr.petshopapi.entity.Pet;
+import com.github.sergiocostaczr.petshopapi.model.Cliente;
+import com.github.sergiocostaczr.petshopapi.model.Pet;
 import com.github.sergiocostaczr.petshopapi.repository.ClienteRepository;
 import com.github.sergiocostaczr.petshopapi.repository.PetRepository;
 import jakarta.persistence.EntityNotFoundException;

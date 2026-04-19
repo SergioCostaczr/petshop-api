@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class ClienteController {
     @Operation(summary = "Cadastrar cliente")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Cadastrado com sucesso"),
                     @ApiResponse(responseCode = "400", description = "Dados inválidos") })
-    public ResponseEntity<ClienteResponseDTO> salvar(@RequestBody ClienteRequestDTO dto) {
+    public ResponseEntity<ClienteResponseDTO> salvar(@RequestBody @Valid ClienteRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(dto));
     }
 
@@ -51,7 +52,7 @@ public class ClienteController {
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Atualizado com sucesso",
                                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = ClienteResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
-    public ResponseEntity<?> atualizarPorId(@Parameter(description = "ID do cliente") @PathVariable Long id, @RequestBody ClienteRequestDTO dto) {
+    public ResponseEntity<?> atualizarPorId(@Parameter(description = "ID do cliente") @PathVariable Long id, @RequestBody @Valid ClienteRequestDTO dto) {
         try {
             return ResponseEntity.ok(service.atualizarPorId(id, dto));
         } catch (EntityNotFoundException e) {

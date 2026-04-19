@@ -2,7 +2,7 @@ package com.github.sergiocostaczr.petshopapi.service;
 
 import com.github.sergiocostaczr.petshopapi.dto.request.ProfissionalRequestDTO;
 import com.github.sergiocostaczr.petshopapi.dto.response.ProfissionalResponseDTO;
-import com.github.sergiocostaczr.petshopapi.entity.Profissional;
+import com.github.sergiocostaczr.petshopapi.model.Profissional;
 import com.github.sergiocostaczr.petshopapi.repository.ProfissionalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

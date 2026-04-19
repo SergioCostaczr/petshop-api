@@ -1,4 +1,4 @@
-package com.github.sergiocostaczr.petshopapi.entity;
+package com.github.sergiocostaczr.petshopapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pet")

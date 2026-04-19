@@ -1,4 +1,4 @@
-package com.github.sergiocostaczr.petshopapi.entity;
+package com.github.sergiocostaczr.petshopapi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
