@@ -32,12 +32,9 @@ public class PetController {
                     @ApiResponse(responseCode = "400", description = "Dados inválidos"),
                     @ApiResponse(responseCode = "404", description = "Cliente dono não encontrado")})
     public ResponseEntity<?> salvar(@RequestBody @Valid PetRequestDTO dto) {
-        try {
-            PetResponseDTO salvar = service.salvar(dto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(salvar);
-        }catch (EntityNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
+        PetResponseDTO salvar = service.salvar(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvar);
+
     }
 
     @GetMapping("{id}")
@@ -45,11 +42,7 @@ public class PetController {
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Pet encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PetResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> buscarPorId(@Parameter(description = "ID do pet") @PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(service.buscarPorId(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PutMapping("{id}")
@@ -58,11 +51,8 @@ public class PetController {
                                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = PetResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> atualizarPorId(@Parameter(description = "ID do pet") @PathVariable Long id, @RequestBody @Valid PetRequestDTO dto) {
-        try {
-            return ResponseEntity.ok(service.atualizarPorId(id, dto));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.atualizarPorId(id, dto));
+
     }
 
     @GetMapping
@@ -77,11 +67,7 @@ public class PetController {
     @ApiResponses({ @ApiResponse(responseCode = "204", description = "Deletado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> deletarPorId(@Parameter(description = "ID do pet") @PathVariable Long id) {
-        try {
-            service.deletarPorId(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        service.deletarPorId(id);
+        return ResponseEntity.noContent().build();
     }
 }

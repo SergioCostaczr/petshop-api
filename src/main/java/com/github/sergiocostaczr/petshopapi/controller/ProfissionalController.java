@@ -41,11 +41,7 @@ public class ProfissionalController {
                                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProfissionalResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> buscarPorId(@Parameter(description = "ID do profissional") @PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(service.buscarPorId(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PutMapping("{id}")
@@ -54,11 +50,7 @@ public class ProfissionalController {
                                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProfissionalResponseDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> atualizarPorId(@Parameter(description = "ID do profissional") @PathVariable Long id, @RequestBody @Valid ProfissionalRequestDTO dto) {
-        try {
-            return ResponseEntity.ok(service.atualizarPorId(id, dto));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.atualizarPorId(id, dto));
     }
 
     @GetMapping
@@ -72,11 +64,7 @@ public class ProfissionalController {
     @ApiResponses({ @ApiResponse(responseCode = "204", description = "Deletado com sucesso"),
                     @ApiResponse(responseCode = "404", description = "Não encontrado") })
     public ResponseEntity<?> deletarPorId(@Parameter(description = "ID do profissional") @PathVariable Long id){
-        try {
-            service.deletarPorId(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        service.deletarPorId(id);
+        return ResponseEntity.noContent().build();
     }
 }
