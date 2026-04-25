@@ -32,6 +32,15 @@ public class AgendamentoService {
             throw new BusinessException("Horário fora do período de funcionamento (08h às 18h)");
         }
 
+        boolean ocupado = agendamentoRepository.existsByProfissionalIdAndDataHora(
+                dto.profissionalId(),
+                dto.dataHora()
+        );
+
+        if (ocupado) {
+            throw new BusinessException("O profissional já possui um agendamento para este horário.");
+        }
+
         Agendamento agenda = new Agendamento();
         agenda.setPet(pet);
         agenda.setProfissional(prof);
