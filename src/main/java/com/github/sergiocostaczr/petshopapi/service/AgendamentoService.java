@@ -13,6 +13,7 @@ import com.github.sergiocostaczr.petshopapi.repository.ProfissionalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class AgendamentoService {
     private final PetRepository petRepository;
     private final ProfissionalRepository profissionalRepository;
 
-
+    @Transactional
     public AgendamentoResponseDTO agendar(AgendamentoRequestDTO dto){
         Pet pet = petRepository.findById(dto.petId()).orElseThrow(()-> new EntityNotFoundException("Pet não encontrado"));
         Profissional prof = profissionalRepository.findById(dto.profissionalId()).orElseThrow(()-> new EntityNotFoundException("Profissional não encontrado"));
