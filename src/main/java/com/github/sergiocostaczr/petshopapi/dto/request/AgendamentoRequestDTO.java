@@ -15,7 +15,7 @@ public record AgendamentoRequestDTO(
 
         @NotNull
         @Future
-        LocalDateTime localDateTime,
+        LocalDateTime dataHora,
 
         String observacoes
 
