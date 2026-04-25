@@ -43,7 +43,7 @@ public class AuthService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(req.email(),req.senha())
         );
-        var usuario = usuarioRepository.findByEmail(req.email()).orElseThrow(() -> new UsernameNotFoundException("Usuario ou senha Incorreto"));
+        var usuario = usuarioRepository.findByEmail(req.email()).orElseThrow(() -> new UsernameNotFoundException("Email ou senha inválidos"));
         return new AuthResponse(jwtService.gerarToken(usuario));
     }
 
