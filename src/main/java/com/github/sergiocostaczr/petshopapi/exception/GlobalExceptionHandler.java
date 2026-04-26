@@ -33,4 +33,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> emailDuplicado(EmailJaCadastradoException e){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<?> businessException(BusinessException e){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+
+    }
+
 }
